@@ -11,7 +11,7 @@ const client = new Client({
 const connect = async () => {
   try {
     await client.connect();
-    console.log('CONNECTED!!');
+    console.log('Database connected');
   } catch (err) {
     console.log(err);
   }

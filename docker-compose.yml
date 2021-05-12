@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   app:
@@ -24,4 +24,4 @@ services:
     restart: always
     ports:
       - 8080:8080
-
+    profiles: ["debug"]
