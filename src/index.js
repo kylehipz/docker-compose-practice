@@ -1,6 +1,8 @@
 const koa = require('koa');
 const Router = require('koa-router');
 const koaBody = require('koa-body');
+const https = require('https');
+const fs = require('fs');
 const router = new Router();
 const Post = require('./posts');
 const {
@@ -109,6 +111,13 @@ app.use((ctx, next) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+const key = fs.readFileSync('./certs/key.pem', 'UTF8');
+const cert = fs.readFileSync('./certs/cert.pem', 'UTF8');
+//console.log(key);
+
+//app.listen(port, () => {
+//console.log(`Server listening on port ${port}`);
+//});
+https
+  .createServer({ key, cert }, app.callback())
+  .listen(port, () => console.log(`Listening on port ${port}`));
